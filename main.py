@@ -20,7 +20,7 @@ while True:
             vector = extract.features()
             q = Sound(features=vector, path=file_path)
             
-            results = queries.query(input=q,k=3)
+            results = queries.query(input=q,k=5)
             for r in results:
                 print(r)
             print()
