@@ -51,14 +51,14 @@ Mỗi bước trượt sẽ tính toán ra một giá trị khoảng cách Manha
 - **Kết quả xuất ra màn hình (Top 5):**
 ```text
 >test_music.wav
-audio/classical.00000_part1.wav  (Top 1)
-audio/classical.00096_part5.wav  (Top 2)
-audio/classical.00025_part5.wav  (Top 3)
-audio/classical.00014_part4.wav  (Top 4)
-audio/classical.00069_part4.wav  (Top 5)
+audio/track_10s_001_classical.00012.wav  (Top 1)
+audio/track_15s_184_classical.00019.wav  (Top 2)
+audio/track_15s_130_classical.00033.wav  (Top 3)
+audio/track_15s_131_classical.00015.wav  (Top 4)
+audio/track_15s_104_classical.00029.wav  (Top 5)
 ```
 
 **Đánh giá kết quả đạt được:** 
-1. **Độ chính xác cao:** Hệ thống trả về kết quả Top 1 chính xác là file `audio/classical.00000_part1.wav`. Điều này chứng tỏ thuật toán hoạt động đúng 100%, vì bản chất file test đầu vào được copy từ chính file này, do đó khoảng cách Manhattan = 0.
+1. **Độ chính xác cao:** Hệ thống trả về kết quả Top 1 chính xác là file `audio/track_10s_001_classical.00012.wav`. Điều này chứng tỏ thuật toán hoạt động đúng 100%, vì bản chất file test đầu vào được copy từ chính file này, do đó khoảng cách Manhattan = 0.
 2. **Khả năng phân tích tốt:** Các file Top 2 đến Top 5 đều là các bản nhạc có đặc trưng âm sắc (tiết tấu, dải tần) tương đồng nhất với file đầu vào.
 3. **Tối ưu hiệu năng:** Hệ thống tìm kiếm chạy rất mượt mà. Thuật toán trượt cửa sổ (Sliding Window) giải quyết cực kỳ tốt bài toán khó nhất là: "So sánh 2 file âm thanh có độ dài chênh lệch nhau" mà không làm mất đi các đặc trưng âm sắc ban đầu.
