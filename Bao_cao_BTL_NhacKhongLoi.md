@@ -3,9 +3,9 @@
 
 ## 1. Xây dựng bộ dữ liệu âm thanh
 - **Nguồn gốc:** Trích xuất từ phân lớp Classical (Nhạc cổ điển) của bộ dữ liệu âm thanh nổi tiếng GTZAN (Kaggle).
-- **Số lượng:** 500 files âm thanh.
+- **Số lượng:** 300 files âm thanh.
 - **Định dạng:** `.wav`
-- **Đặc điểm:** 100% là các bản nhạc không lời, được cắt nhỏ thành các đoạn có độ dài đúng 6 giây. Độ dài 6 giây là khoảng thời gian lý tưởng, vừa đủ để giữ lại một giai điệu cụ thể, vừa giúp việc trích xuất đặc trưng diễn ra cực kỳ nhanh chóng mà không làm quá tải bộ nhớ.
+- **Đặc điểm:** Đảm bảo 100% là các bản nhạc không lời, được giữ nguyên bản độ dài 30 giây. Mỗi bản nhạc 30 giây chứa đựng đầy đủ sự biến đổi về giai điệu và nhịp điệu, là chuẩn vàng (Golden standard) cho bài toán phân tích âm thanh đa phương tiện.
 
 ## 2. Bộ thuộc tính nhận diện bản nhạc (Feature Extraction)
 Để nhận diện và tìm ra sự tương đồng giữa các đoạn nhạc, hệ thống tiến hành trích xuất 6 đặc trưng âm thanh chuyên sâu thông qua thư viện `librosa` của Python:
