@@ -42,20 +42,28 @@ class Init:
         return vector.T
         
     def init(self):     
+        import sqlite3
+        conn = sqlite3.connect('database.db')
+        c = conn.cursor()
+        c.execute('DROP TABLE IF EXISTS sounds')
+        c.execute('CREATE TABLE sounds (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, features BLOB, shape TEXT)')
+        
         folder = os.listdir(self.path)
-        sounds = []
         for file in tqdm(folder, colour="yellow"):
             sound_path = self.path + "/" + file
             vector = self.features(sound_path)
-            sound = Sound(vector, sound_path)
-            sounds.append(sound)
+            
+            features_blob = vector.tobytes()
+            shape_str = str(vector.shape)
+            
+            c.execute('INSERT INTO sounds (path, features, shape) VALUES (?, ?, ?)', 
+                      (sound_path, features_blob, shape_str))
+            
+        conn.commit()
+        conn.close()
         
         print("Extraction completed.")
-        
-        with open('sounds.obj', 'wb') as output:
-            pickle.dump(sounds, output, pickle.HIGHEST_PROTOCOL)
-        
-        print("Saved sound's list at sounds.obj.")
+        print("Saved sound's list to database.db (SQLite).")
 
 class Extract:
     def __init__(self, sound_path : str):

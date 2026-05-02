@@ -19,7 +19,11 @@
 **Lý do lựa chọn & Giá trị thông tin:** Sự kết hợp của 6 đặc trưng này tạo ra một "Dấu vân tay kỹ thuật số" (Digital Fingerprint) hoàn hảo cho âm nhạc. Thay vì so sánh từng nốt nhạc (rất dễ sai lệch), hệ thống sẽ so sánh âm sắc, cường độ, và tiết tấu tổng thể, giúp tìm ra các đoạn nhạc mang "cảm giác" giống nhau nhất một cách chính xác.
 
 ## 3. Hệ CSDL quản lý siêu dữ liệu & Cơ chế tìm kiếm
-- **Lưu trữ CSDL:** Các vector đặc trưng (sau khi trích xuất) cùng với đường dẫn file được đóng gói và lưu trữ vào file nhị phân `sounds.obj` bằng thư viện `pickle` (NoSQL dạng Object). Việc lưu trữ trực tiếp dưới dạng Object trên RAM giúp quá trình load dữ liệu và tìm kiếm diễn ra chỉ trong tích tắc.
+- **Lưu trữ CSDL:** Thay vì lưu trữ file thô sơ, toàn bộ siêu dữ liệu được quản lý chuyên nghiệp bằng hệ quản trị CSDL quan hệ **SQLite**. Dữ liệu được tổ chức vào bảng `sounds` trong file `database.db`:
+  - Cột `path` (TEXT): Lưu đường dẫn của file âm thanh.
+  - Cột `features` (BLOB): Ma trận vector đặc trưng (NumPy array) được mã hóa nhị phân (Binary Large Object) để tối ưu không gian lưu trữ và tốc độ truy xuất.
+  - Cột `shape` (TEXT): Lưu kích thước ma trận để phục hồi cấu trúc khi load dữ liệu.
+Việc ứng dụng SQLite không chỉ chuẩn hóa kiến trúc CSDL theo đúng tiêu chuẩn học thuật mà còn giúp hệ thống dễ dàng mở rộng (Scale-up) sau này.
 - **Cơ chế tìm kiếm (Sliding Window & Khoảng cách Manhattan):**
   Hệ thống sử dụng kỹ thuật "Trượt cửa sổ" (Sliding Window) để so sánh file âm thanh đầu vào với các file lưu trong CSDL.
   - Chia file âm thanh thành các frame nhỏ.
